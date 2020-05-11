@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "addform.h"
-#include "datamanager.h"
 
 namespace Ui {
 class Overview;
@@ -20,14 +19,12 @@ public:
 private slots:
 
     void on_pushButton_logout_clicked();
-
     void on_pushButton_add_clicked();
-
     void on_pushButton_show_edit_clicked();
-
     void on_pushButton_delete_clicked();
-
     void on_pushButton_clicked();
+
+    void on_pushButton_copy_clicked();
 
 private:
     Ui::Overview *ui;

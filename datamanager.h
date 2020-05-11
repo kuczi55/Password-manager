@@ -1,13 +1,9 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
-#include <QFile>
-#include <QTextStream>
 #include <QApplication>
-#include "encryption.h"
 #include <QListWidget>
-#include <QMessageBox>
-#include <QFileInfo>
+
 
 QString return_line(QString datas, QString name);
 bool check_if_exist(QString datas, QString name);
