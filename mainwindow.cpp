@@ -80,7 +80,7 @@ void MainWindow::on_pushButton_signUp_clicked()
         QFile data(userdata);
         if(data.open(QIODevice::ReadWrite | QIODevice::Append)) {
             QTextStream stream(&data);
-            QString salt = genSalt();
+            QString salt = gen_salt();
             stream << username << semiclon << sha256(salt+password) << semiclon << salt << endl;
             stream.flush();
             data.flush();

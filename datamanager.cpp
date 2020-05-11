@@ -51,7 +51,7 @@ void load_from_file(QListWidget* list, QString user, QString pass) {
         encrypted_data = data.split("\n");
         user_data.close();
         for(int i = 0; i < encrypted_data.size()-1; i++) {
-            QString decrypted = Decrypt(encrypted_data[i], pass);
+            QString decrypted = decrypt(encrypted_data[i], pass);
             QStringList splitted = decrypted.split(semiclon);
             if(splitted.size() < 4) {
                 QMessageBox::warning(list, "Parse data", "Critical error");
@@ -77,9 +77,9 @@ bool edit_file(QString user, QString pass, QString original,
         QTextStream tmp(&temp_file);
         while(!org.atEnd()) {
             QString actual_line = org.readLine();
-            if(Decrypt(actual_line, pass) == original) {
+            if(decrypt(actual_line, pass) == original) {
                 if(!remove) {
-                    tmp << Encrypt(replace, pass) << endl;
+                    tmp << encrypt(replace, pass) << endl;
                 }
             }
             else {

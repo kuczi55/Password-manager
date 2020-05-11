@@ -6,7 +6,7 @@
 
 static constexpr char userdata[] = "userdata.mps";
 static constexpr char extension[] = ".mps";
-constexpr char semiclon = ';';
+static constexpr char semiclon = ';';
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

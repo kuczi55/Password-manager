@@ -13,7 +13,7 @@
 random_device my_random_device;
 default_random_engine my_random_engine(my_random_device());
 
-QString genSalt() {
+QString gen_salt() {
 
     const char charset[] =
         "0123456789"
@@ -46,14 +46,14 @@ QString buffer_as_hex(const unsigned char *buf, size_t size) {
     return QString::fromStdString(res.str());
 }
 
-QString Encrypt(QString decrypted, QString pass) {
+QString encrypt(QString decrypted, QString pass) {
     quint64 key{1};
     key = static_cast<quint64>(pass.toULongLong());
     SimpleCrypt crypto(key);
     return crypto.encryptToString(decrypted);
 }
 
-QString Decrypt(QString encrypted, QString pass) {
+QString decrypt(QString encrypted, QString pass) {
     quint64 key{1};
     key = static_cast<quint64>(pass.toULongLong());
     SimpleCrypt crypto(key);

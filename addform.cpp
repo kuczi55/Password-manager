@@ -68,7 +68,7 @@ void AddForm::on_pushButton_clicked()
         if(list != NULL) {
             QList<QListWidgetItem *> exist = list->findItems(title, Qt::MatchExactly);
             if(!edit && exist.length() == 0) {
-                if(add_to_file(file_name, Encrypt(info, password))) {
+                if(add_to_file(file_name, encrypt(info, password))) {
                     QListWidgetItem* item = new QListWidgetItem();
                     item->setText(title);
                     item->setData(Qt::UserRole, info);
