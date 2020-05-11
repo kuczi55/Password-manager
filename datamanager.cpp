@@ -54,7 +54,7 @@ void load_from_file(QListWidget* list, QString user, QString pass) {
             QString decrypted = decrypt(encrypted_data[i], pass);
             QStringList splitted = decrypted.split(semiclon);
             if(splitted.size() < 4) {
-                QMessageBox::warning(list, "Parse data", "Critical error");
+                QMessageBox::critical(list, "Parse data", "Critical error");
                 exit(EXIT_FAILURE);
             }
             QListWidgetItem *item = new QListWidgetItem();

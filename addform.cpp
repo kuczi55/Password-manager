@@ -21,7 +21,7 @@ AddForm::AddForm(QWidget *parent, QString password, QString user,
         QString data = line->data(Qt::UserRole).toString();
         QStringList splitted = data.split(semiclon);
         if(splitted.size() < 4) {
-            QMessageBox::warning(this, "Edit data", "Critical error");
+            QMessageBox::critical(this, "Edit data", "Critical error");
             exit(EXIT_FAILURE);
         }
         ui->lineEdit_title->setText(splitted[0]);
@@ -83,7 +83,7 @@ void AddForm::on_pushButton_clicked()
             else if(edit && (exist.length() == 0 || exist[0]->text() == line->text())){
                 QString original = line->data(Qt::UserRole).toString();
                 if(!edit_file(user, password, original, info)) {
-                    QMessageBox::warning(this, "Add", "Critical error");
+                    QMessageBox::critical(this, "Add", "Critical error");
                     exit(EXIT_FAILURE);
                 }
                 line->setText(title);
@@ -96,7 +96,7 @@ void AddForm::on_pushButton_clicked()
             }
         }
         else {
-            QMessageBox::warning(this, "Add", "Critical error");
+            QMessageBox::critical(this, "Add", "Critical error");
             exit(EXIT_FAILURE);
         }
     }

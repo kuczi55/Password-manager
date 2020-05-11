@@ -27,6 +27,8 @@ private slots:
 
     void on_pushButton_delete_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Overview *ui;
     AddForm *addForm;

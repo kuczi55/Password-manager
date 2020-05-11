@@ -1,6 +1,7 @@
 #include "overview.h"
 #include "ui_overview.h"
 #include <QMessageBox>
+#include "mainwindow.h"
 
 Overview::Overview(QWidget *parent, QString password, QString user) :
     QDialog(parent),
@@ -21,7 +22,8 @@ Overview::~Overview()
 void Overview::on_pushButton_logout_clicked()
 {
     close();
-    parentWidget()->show();
+    MainWindow *main_window = new MainWindow();
+    main_window->show();
 }
 
 void Overview::on_pushButton_add_clicked()
@@ -51,7 +53,7 @@ void Overview::on_pushButton_delete_clicked()
                                       QMessageBox::Yes|QMessageBox::No);
         if(reply == QMessageBox::Yes) {
             if(!edit_file(user, password, items[0]->data(Qt::UserRole).toString(), "", true)) {
-                QMessageBox::warning(this, "Delete", "Critical error");
+                QMessageBox::critical(this, "Delete", "Critical error");
                 exit(EXIT_FAILURE);
             }
             qDeleteAll(ui->listWidget->selectedItems());
@@ -61,4 +63,12 @@ void Overview::on_pushButton_delete_clicked()
     else {
          QMessageBox::warning(this, "Delete", "Please select item");
     }
+}
+
+void Overview::on_pushButton_clicked()
+{
+    QMessageBox mb(QMessageBox::NoIcon, "Generate",
+                   gen_salt(), QMessageBox::Ok, this);
+    mb.setTextInteractionFlags(Qt::TextSelectableByMouse);
+    mb.exec();
 }

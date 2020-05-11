@@ -38,7 +38,7 @@ void MainWindow::on_pushButton_login_clicked()
     else {
         QStringList pieces = user_data.split(semiclon);
         if(pieces.size() < 3) {
-            QMessageBox::warning(this, "Login", "Critical error");
+            QMessageBox::critical(this, "Login", "Critical error");
             exit(EXIT_FAILURE);
         }
         QString correct_pass = pieces.value(1);
@@ -48,8 +48,8 @@ void MainWindow::on_pushButton_login_clicked()
             QMessageBox::warning(this, "Login", "Invalid username or password");
         }
         else {
-            hide();
-            view = new Overview(this, md5(password), username);
+            close();
+            view = new Overview(nullptr, md5(password), username);
             view->show();
         }
     }
