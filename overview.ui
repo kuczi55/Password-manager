@@ -16,18 +16,20 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-<<<<<<< Updated upstream
-     <x>30</x>
-     <y>180</y>
-=======
      <x>50</x>
      <y>130</y>
->>>>>>> Stashed changes
      <width>95</width>
-     <height>135</height>
+     <height>170</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_copy">
+      <property name="text">
+       <string>Copy pass</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QPushButton" name="pushButton_show_edit">
       <property name="text">
@@ -71,8 +73,6 @@
     <string>Generate</string>
    </property>
   </widget>
-<<<<<<< Updated upstream
-=======
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
@@ -83,7 +83,6 @@
     </rect>
    </property>
   </widget>
->>>>>>> Stashed changes
  </widget>
  <resources/>
  <connections/>

@@ -20,19 +20,11 @@ public:
 private slots:
 
     void on_pushButton_logout_clicked();
-
     void on_pushButton_add_clicked();
-
     void on_pushButton_show_edit_clicked();
-
     void on_pushButton_delete_clicked();
-<<<<<<< Updated upstream
-
-    void on_pushButton_clicked();
-=======
     void on_pushButton_clicked();
     void on_pushButton_copy_clicked();
->>>>>>> Stashed changes
 
 private:
     Ui::Overview *ui;

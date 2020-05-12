@@ -23,13 +23,12 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_cancel_clicked();
-<<<<<<< Updated upstream
-=======
+
     bool check_conditions(QString title, QString username, QString file_name,
                           QString pass, QString repeat, QString url);
     void fill_data();
     QTableWidgetItem *check_exist(QString check);
->>>>>>> Stashed changes
+
 
 private:
     Ui::AddForm *ui;

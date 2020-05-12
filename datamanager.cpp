@@ -1,16 +1,12 @@
 #include "datamanager.h"
 #include "mainwindow.h"
 #include <iostream>
-<<<<<<< Updated upstream
-
-=======
 #include <QMessageBox>
 #include <QFileInfo>
 #include "encryption.h"
 #include <QFile>
 #include <QTextStream>
 #include <QTableWidget>
->>>>>>> Stashed changes
 
 QString return_line(QString datas, QString name) {
     name.append(semiclon);
@@ -50,13 +46,8 @@ bool add_to_file(QString file, QString line) {
     }
 }
 
-<<<<<<< Updated upstream
-void load_from_file(QListWidget* list, QString user, QString pass) {
-    QFile user_data(user.append(extension));
-=======
 void load_from_file(QString user, QString pass, QTableWidget *table) {
     QFile user_data(data_dir + user + extension);
->>>>>>> Stashed changes
     QStringList encrypted_data;
     if (user_data.open(QFile::ReadOnly))
     {
@@ -65,18 +56,12 @@ void load_from_file(QString user, QString pass, QTableWidget *table) {
         encrypted_data = data.split("\n");
         user_data.close();
         for(int i = 0; i < encrypted_data.size()-1; i++) {
-            QString decrypted = decrypt(encrypted_data[i], pass);
+            QString decrypted = crypt::decrypt(encrypted_data[i], pass);
             QStringList splitted = decrypted.split(semiclon);
             if(splitted.size() < 4) {
                 QMessageBox::critical(table, "Parse data", "Critical error");
                 exit(EXIT_FAILURE);
             }
-<<<<<<< Updated upstream
-            QListWidgetItem *item = new QListWidgetItem();
-            item->setText(splitted[0]);
-            item->setData(Qt::UserRole, decrypted);
-            list->addItem(item);
-=======
             table->insertRow(table->rowCount());
             QTableWidgetItem* data_item = new QTableWidgetItem();
             data_item->setText(splitted[0]);
@@ -84,16 +69,14 @@ void load_from_file(QString user, QString pass, QTableWidget *table) {
             table->setItem(table->rowCount()-1, 0, data_item);
             table->setItem(table->rowCount()-1, 1, new QTableWidgetItem(splitted[1]));
             table->setItem(table->rowCount()-1, 2, new QTableWidgetItem(splitted[3]));
->>>>>>> Stashed changes
         }
     }
 }
 
 bool edit_file(QString user, QString pass, QString original,
                QString replace, bool remove) {
-    QFile original_file(user + extension);
-    QFileInfo org_file_info(user + extension);
-    QFile temp_file(user + extension + ".temp");
+    QFile original_file(data_dir + user + extension);
+    QFile temp_file(data_dir + user + extension + ".temp");
     original_file.open(QIODevice::ReadOnly | QIODevice::Text);
     temp_file.open(QIODevice::WriteOnly | QIODevice::Text);
     if(original_file.isOpen() && temp_file.isOpen()) {
@@ -101,9 +84,9 @@ bool edit_file(QString user, QString pass, QString original,
         QTextStream tmp(&temp_file);
         while(!org.atEnd()) {
             QString actual_line = org.readLine();
-            if(decrypt(actual_line, pass) == original) {
+            if(crypt::decrypt(actual_line, pass) == original) {
                 if(!remove) {
-                    tmp << encrypt(replace, pass) << endl;
+                    tmp << crypt::encrypt(replace, pass) << endl;
                 }
             }
             else {
@@ -113,7 +96,7 @@ bool edit_file(QString user, QString pass, QString original,
         original_file.close();
         temp_file.close();
         original_file.remove();
-        temp_file.rename(org_file_info.fileName());
+        temp_file.rename(data_dir + user + extension);
         return true;
     }
     return false;

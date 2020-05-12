@@ -6,12 +6,9 @@
 #include <QApplication>
 #include "encryption.h"
 #include <QListWidget>
-<<<<<<< Updated upstream
 #include <QMessageBox>
 #include <QFileInfo>
-=======
 #include <QTableWidget>
->>>>>>> Stashed changes
 
 QString return_line(QString datas, QString name);
 bool check_if_exist(QString datas, QString name);
