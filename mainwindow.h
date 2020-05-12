@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include "overview.h"
 
-static constexpr char userdata[] = "userdata.mps";
-static constexpr char extension[] = ".mps";
+static const QString userdata = "userdata.mps";
+static const QString extension = ".mps";
+static const QString data_dir = "data/";
 static constexpr char semiclon = ';';
 
 QT_BEGIN_NAMESPACE
@@ -22,10 +23,9 @@ public:
 
 private slots:
     void clear_all_fields();
-
     void on_pushButton_login_clicked();
-
     void on_pushButton_signUp_clicked();
+    bool check_conditions(QString username, QString password, QString repeated_password);
 
 private:
     Ui::MainWindow *ui;
