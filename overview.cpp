@@ -3,6 +3,14 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 
+void setup_table(QTableWidget* table) {
+    table->setColumnCount(3);
+    table->setHorizontalHeaderLabels({"Title", "Username", "Url"});
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setSelectionMode( QAbstractItemView::SingleSelection );
+}
+
 Overview::Overview(QWidget *parent, QString password, QString user) :
     QDialog(parent),
     ui(new Ui::Overview),
@@ -10,7 +18,8 @@ Overview::Overview(QWidget *parent, QString password, QString user) :
     user(user)
 {
     ui->setupUi(this);
-    load_from_file(ui->listWidget, user, password);
+    setup_table(ui->tableWidget);
+    load_from_file(user, password, ui->tableWidget);
 }
 
 Overview::~Overview()
@@ -28,15 +37,15 @@ void Overview::on_pushButton_logout_clicked()
 
 void Overview::on_pushButton_add_clicked()
 {
-    addForm = new AddForm(this, password, user, ui->listWidget);
+    addForm = new AddForm(this, password, user, ui->tableWidget);
     addForm->exec();
 }
 
 void Overview::on_pushButton_show_edit_clicked()
 {
-    QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
-    if(items.length() == 1) {
-        addForm = new AddForm(this, password, user, ui->listWidget, true, items[0]);
+    QList<QTableWidgetItem*> items = ui->tableWidget->selectedItems();
+    if(items.length() != 0) {
+        addForm = new AddForm(this, password, user, ui->tableWidget, true, items);
         addForm->exec();
     }
     else {
@@ -46,8 +55,8 @@ void Overview::on_pushButton_show_edit_clicked()
 
 void Overview::on_pushButton_delete_clicked()
 {
-    QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
-    if(items.length() == 1) {
+    QList<QTableWidgetItem*> items = ui->tableWidget->selectedItems();
+    if(items.length() != 0) {
         QMessageBox::StandardButton reply;
         reply = QMessageBox::question(this, "Delete", "Are you sure?",
                                       QMessageBox::Yes|QMessageBox::No);
@@ -56,7 +65,7 @@ void Overview::on_pushButton_delete_clicked()
                 QMessageBox::critical(this, "Delete", "Critical error");
                 exit(EXIT_FAILURE);
             }
-            qDeleteAll(ui->listWidget->selectedItems());
+            ui->tableWidget->removeRow(ui->tableWidget->selectionModel()->currentIndex().row());
             QMessageBox::information(this, "Delete", "Successfully removed data");
         }
     }
@@ -72,3 +81,22 @@ void Overview::on_pushButton_clicked()
     mb.setTextInteractionFlags(Qt::TextSelectableByMouse);
     mb.exec();
 }
+<<<<<<< Updated upstream
+=======
+
+void Overview::on_pushButton_copy_clicked()
+{
+    QList<QTableWidgetItem*> items = ui->tableWidget->selectedItems();
+    if(items.length() != 0) {
+        QString data = items[0]->data(Qt::UserRole).toString();
+        QStringList splitted = data.split(semiclon);
+        QString pass = splitted[2];
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(pass);
+        QMessageBox::information(this, "Copy to clipboard", "Successfully copied password to clipboard");
+    }
+    else {
+         QMessageBox::warning(this, "Delete", "Please select item");
+    }
+}
+>>>>>>> Stashed changes

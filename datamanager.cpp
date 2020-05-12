@@ -1,7 +1,16 @@
 #include "datamanager.h"
 #include "mainwindow.h"
 #include <iostream>
+<<<<<<< Updated upstream
 
+=======
+#include <QMessageBox>
+#include <QFileInfo>
+#include "encryption.h"
+#include <QFile>
+#include <QTextStream>
+#include <QTableWidget>
+>>>>>>> Stashed changes
 
 QString return_line(QString datas, QString name) {
     name.append(semiclon);
@@ -41,8 +50,13 @@ bool add_to_file(QString file, QString line) {
     }
 }
 
+<<<<<<< Updated upstream
 void load_from_file(QListWidget* list, QString user, QString pass) {
     QFile user_data(user.append(extension));
+=======
+void load_from_file(QString user, QString pass, QTableWidget *table) {
+    QFile user_data(data_dir + user + extension);
+>>>>>>> Stashed changes
     QStringList encrypted_data;
     if (user_data.open(QFile::ReadOnly))
     {
@@ -54,13 +68,23 @@ void load_from_file(QListWidget* list, QString user, QString pass) {
             QString decrypted = decrypt(encrypted_data[i], pass);
             QStringList splitted = decrypted.split(semiclon);
             if(splitted.size() < 4) {
-                QMessageBox::critical(list, "Parse data", "Critical error");
+                QMessageBox::critical(table, "Parse data", "Critical error");
                 exit(EXIT_FAILURE);
             }
+<<<<<<< Updated upstream
             QListWidgetItem *item = new QListWidgetItem();
             item->setText(splitted[0]);
             item->setData(Qt::UserRole, decrypted);
             list->addItem(item);
+=======
+            table->insertRow(table->rowCount());
+            QTableWidgetItem* data_item = new QTableWidgetItem();
+            data_item->setText(splitted[0]);
+            data_item->setData(Qt::UserRole, decrypted);
+            table->setItem(table->rowCount()-1, 0, data_item);
+            table->setItem(table->rowCount()-1, 1, new QTableWidgetItem(splitted[1]));
+            table->setItem(table->rowCount()-1, 2, new QTableWidgetItem(splitted[3]));
+>>>>>>> Stashed changes
         }
     }
 }
