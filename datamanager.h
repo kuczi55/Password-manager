@@ -1,13 +1,7 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
-#include <QFile>
-#include <QTextStream>
 #include <QApplication>
-#include "encryption.h"
-#include <QListWidget>
-#include <QMessageBox>
-#include <QFileInfo>
 #include <QTableWidget>
 
 QString return_line(QString datas, QString name);

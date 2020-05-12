@@ -8,7 +8,6 @@ using namespace std;
 
 namespace crypt {
     QString gen_salt();
-    template <size_t multiple> size_t round_up(const size_t len);
     QString buffer_as_hex(const unsigned char *buf, size_t size);
     QString sha256(const QString str);
     QString md5(const QString pass);

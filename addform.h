@@ -19,11 +19,8 @@ public:
 
 private slots:
     void on_checkBox_stateChanged(int arg1);
-
     void on_pushButton_clicked();
-
     void on_pushButton_cancel_clicked();
-
     bool check_conditions(QString title, QString username, QString file_name,
                           QString pass, QString repeat, QString url);
     void fill_data();
